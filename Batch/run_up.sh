@@ -10,7 +10,7 @@ fi
 echo ">>>> Docker-compose complited $status !"
 echo ">>>> ###################################"
 echo ">>>> Waiting to transfering file to hdfs..."
-sleep 5 
+sleep 10 
 docker exec namenode hdfs dfs -copyFromLocal NoviSad.csv / > logs/transfer_output.log 2>&1
 transfer_exit_code=$?
 status="SUCCESSFULLY"
