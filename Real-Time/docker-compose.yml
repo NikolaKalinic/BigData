@@ -76,3 +76,19 @@ services:
       - 8082:8081
     env_file:
       - ./hadoop.env
+
+  postgresql:
+    image: postgres
+    container_name: postgresql
+    environment:
+      - POSTGRES_PASSWORD=admin
+
+  superset:
+    build: ./superset/
+    container_name: superset
+    environment:
+      - ADMIN_USERNAME=admin
+      - ADMIN_EMAIL=admin@superset.com
+      - ADMIN_PASSWORD=admin
+    ports:
+      - "8088:8088"
