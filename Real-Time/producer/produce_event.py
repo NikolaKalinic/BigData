@@ -1,9 +1,10 @@
 from confluent_kafka import Producer
 import json
 from uuid import uuid4
+import requests
 
 
-TOPIC = 'html_file'
+TOPIC = 'raw'
 PRODUCER_CONFIG = {
         "bootstrap.servers": 'kafka:9092',
         'client.id': 'python_producer',
@@ -13,36 +14,29 @@ PRODUCER_CONFIG = {
 def get_uuid():
     return str(uuid4())
 
+def fetch_weather_data():
+    api_url = 'http://api.weatherapi.com/v1/current.json?key=5ea4340e491244e490f221127241601&q=Belgrade&aqi=no'
 
-def get_valid_data():
-    event_id = get_uuid()
-    return {
-        "id": event_id,
-        "category": "TimeTrackingEvent",
-        "action": "ReviewTrackerPaging",
-        "type": "track",
-        "product": "test",
-        "app": "test-app",
-        "event_ts": "1632748587682",
-        "event_sent_ts": "1632748587684",
-        "platform": "web",
-        "hostname": "test.com",
-        "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Safari/605.1.15",
-        "ip_address": "174.68.222.198"
-    }
-
-
-def get_invalid_data():
-    return {"no_id": "here"}
-
+    response = requests.get(api_url)
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print(f"Failed to fetch weather data. Status code: {response.status_code}")
+        return None
 
 def main():
-    p = Producer(PRODUCER_CONFIG)
-    p.produce(
-        topic=TOPIC,
-        value=json.dumps(get_valid_data()),
-    )
-    p.flush()
+    weather_data = fetch_weather_data()
+
+    if weather_data:
+        p = Producer(PRODUCER_CONFIG)
+        event_id = get_uuid()
+        weather_data['id'] = event_id
+
+        p.produce(
+            topic=TOPIC,
+            value=json.dumps(weather_data),
+        )
+        p.flush()
 
 if __name__ == '__main__':
     main()

@@ -28,67 +28,80 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT, PLAINTEXT_HOST:PLAINTEXT, OUTSIDE_KUBE:PLAINTEXT
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-    healthcheck:
-      test: ["CMD", "kafka-topics", "--zookeeper", "zookeeper:2181", "--list"]
-      interval: 5s
-      timeout: 10s
-      retries: 5
+    restart: always
+    # healthcheck:
+    #   test: ["CMD-SHELL", "echo 'exit' | nc -z kafka 9092"]
+    #   interval: 5s
+    #   timeout: 10s
+    #   retries: 5
+    # command: sh -c "sleep 30 && kafka-topics --create --zookeeper zookeeper:2181 --replication-factor 1 --partitions 2 --topic raw && sleep infinity"
+
+    #zavrsava sa exitom 0 smisli nesto
 
   producer:
     build: ./producer/
     container_name: producer
     volumes:
       - ./producer/produce_event.py:/produce_event.py
-    command: ["sleep", "infinity"]
+    #command: sleep infinity && echo "* * * * * /usr/bin/python3 /produce_event.py" >> crontab - && service cron start
+    command: sleep infinity
 
-  spark-master:
-    image: bde2020/spark-master:3.0.1-hadoop3.2
-    container_name: spark-master
-    ports:
-      - 8080:8080
-      - 7077:7077
-    environment:
-      - PYSPARK_PYTHON=python3
-      - PYSPARK_DRIVER_PYTHON=python3
-    env_file:
-      - ./hadoop.env
+  consumer:
+    build: ./consumer/
+    container_name: consumer
+    restart: always
+    volumes:
+      - ./consumer/consumer.py:/consumer.py
+    command: sleep infinity
 
-  spark-worker1:
-    image: bde2020/spark-worker:3.0.1-hadoop3.2
-    container_name: spark-worker1
-    depends_on:
-      - spark-master
-    environment:
-      - SPARK_MASTER=spark://spark-master:7077
-    ports:
-      - 8081:8081
-    env_file:
-      - ./hadoop.env
+  # spark-master:
+  #   image: bde2020/spark-master:3.0.1-hadoop3.2
+  #   container_name: spark-master
+  #   ports:
+  #     - 8080:8080
+  #     - 7077:7077
+  #   environment:
+  #     - PYSPARK_PYTHON=python3
+  #     - PYSPARK_DRIVER_PYTHON=python3
+  #   env_file:
+  #     - ./hadoop.env
 
-  spark-worker2:
-    image: bde2020/spark-worker:3.0.1-hadoop3.2
-    container_name: spark-worker2
-    depends_on:
-      - spark-master
-    environment:
-      - SPARK_MASTER=spark://spark-master:7077
-    ports:
-      - 8082:8081
-    env_file:
-      - ./hadoop.env
+  # spark-worker1:
+  #   image: bde2020/spark-worker:3.0.1-hadoop3.2
+  #   container_name: spark-worker1
+  #   depends_on:
+  #     - spark-master
+  #   environment:
+  #     - SPARK_MASTER=spark://spark-master:7077
+  #   ports:
+  #     - 8081:8081
+  #   env_file:
+  #     - ./hadoop.env
 
-  postgresql:
-    image: postgres
-    container_name: postgresql
-    environment:
-      - POSTGRES_PASSWORD=admin
+  # spark-worker2:
+  #   image: bde2020/spark-worker:3.0.1-hadoop3.2
+  #   container_name: spark-worker2
+  #   depends_on:
+  #     - spark-master
+  #   environment:
+  #     - SPARK_MASTER=spark://spark-master:7077
+  #   ports:
+  #     - 8082:8081
+  #   env_file:
+  #     - ./hadoop.env
 
-  superset:
-    build: ./superset/
-    container_name: superset
-    environment:
-      - ADMIN_USERNAME=admin
-      - ADMIN_EMAIL=admin@superset.com
-      - ADMIN_PASSWORD=admin
-    ports:
-      - "8088:8088"
+  # postgresql:
+  #   image: postgres
+  #   container_name: postgresql
+  #   environment:
+  #     - POSTGRES_PASSWORD=admin
+
+  # superset:
+  #   build: ./superset/
+  #   container_name: superset
+  #   environment:
+  #     - ADMIN_USERNAME=admin
+  #     - ADMIN_EMAIL=admin@superset.com
+  #     - ADMIN_PASSWORD=admin
+  #   ports:
+  #     - "8088:8088"
