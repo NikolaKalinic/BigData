@@ -6,7 +6,11 @@ services:
     container_name: namenode
     volumes:
       - namenode:/hadoop/dfs/name
-      - ./NoviSad.csv:/NoviSad.csv
+      - ./data/NoviSad.csv:/NoviSad.csv
+      - ./data/Belgrade.csv:/Belgrade.csv
+      - ./data/Nis.csv:/Nis.csv
+      - ./data/Subotica.csv:/Subotica.csv
+      - ./data/Kragujevac.csv:/Kragujevac.csv
     environment:
       - CLUSTER_NAME=test
     env_file:
@@ -14,6 +18,8 @@ services:
     ports:
       - 9870:9870
       - 9000:9000
+    networks:
+      - asvsp
 
   datanode1:
     image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
@@ -24,6 +30,8 @@ services:
       - ./hadoop-hive.env
     environment:
       SERVICE_PRECONDITION: "namenode:9870"
+    networks:
+      - asvsp
 
   datanode2:
     image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
@@ -34,6 +42,8 @@ services:
       - ./hadoop-hive.env
     environment:
       SERVICE_PRECONDITION: "namenode:9870"
+    networks:
+      - asvsp
 
   datanode3:
     image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
@@ -44,6 +54,8 @@ services:
       - ./hadoop-hive.env
     environment:
       SERVICE_PRECONDITION: "namenode:9870"
+    networks:
+      - asvsp
 
   spark-master:
     image: bde2020/spark-master:3.0.1-hadoop3.2
@@ -55,9 +67,12 @@ services:
       - PYSPARK_PYTHON=python3
       - PYSPARK_DRIVER_PYTHON=python3
     volumes:
-      - ./spark.py:/spark.py
+      - ./preprocessing.py:/preprocessing.py
+      - ./query/winter.py:/winter.py
     env_file:
       - ./hadoop-hive.env
+    networks:
+      - asvsp
 
   spark-worker1:
     image: bde2020/spark-worker:3.0.1-hadoop3.2
@@ -70,6 +85,8 @@ services:
       - 8081:8081
     env_file:
       - ./hadoop-hive.env
+    networks:
+      - asvsp
 
   spark-worker2:
     image: bde2020/spark-worker:3.0.1-hadoop3.2
@@ -82,6 +99,8 @@ services:
       - 8082:8081
     env_file:
       - ./hadoop-hive.env
+    networks:
+      - asvsp
 
   hive-server:
     image: bde2020/hive:2.3.2-postgresql-metastore
@@ -93,6 +112,8 @@ services:
       SERVICE_PRECONDITION: "hive-metastore:9083"
     ports:
       - "10000:10000"
+    networks:
+      - asvsp
 
   hive-metastore:
     image: bde2020/hive:2.3.2-postgresql-metastore
@@ -104,10 +125,14 @@ services:
       SERVICE_PRECONDITION: "namenode:9870 datanode1:9864 datanode2:9864 datanode3:9864 hive-metastore-postgresql:5432"
     ports:
       - "9083:9083"
+    networks:
+      - asvsp
 
   hive-metastore-postgresql:
     image: bde2020/hive-metastore-postgresql:2.3.0
     container_name: hive-metastore-postgresql
+    networks:
+      - asvsp
 
   cloudera:
     image: gethue/hue:20201111-135001
@@ -119,9 +144,27 @@ services:
       - ./conf.dist:/usr/share/hue/desktop/conf
     depends_on:
       - hive-server
+    networks:
+      - asvsp
+
+  superset:
+    build: ./superset/
+    container_name: superset
+    environment:
+      - ADMIN_USERNAME=admin
+      - ADMIN_EMAIL=admin@superset.com
+      - ADMIN_PASSWORD=admin
+    ports:
+      - "8088:8088"
+    networks:
+      - asvsp
 
 volumes:
   namenode:
   datanode1:
   datanode2:
   datanode3:
+
+networks:
+  asvsp:
+    external: true

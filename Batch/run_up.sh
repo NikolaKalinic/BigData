@@ -12,6 +12,10 @@ echo ">>>> ###################################"
 echo ">>>> Waiting to transfering file to hdfs..."
 sleep 10 
 docker exec namenode hdfs dfs -copyFromLocal NoviSad.csv / > logs/transfer_output.log 2>&1
+docker exec namenode hdfs dfs -copyFromLocal Belgrade.csv / >> logs/transfer_output.log 2>&1
+docker exec namenode hdfs dfs -copyFromLocal Nis.csv / >> logs/transfer_output.log 2>&1
+docker exec namenode hdfs dfs -copyFromLocal Subotica.csv / >> logs/transfer_output.log 2>&1
+docker exec namenode hdfs dfs -copyFromLocal Kragujevac.csv / >> logs/transfer_output.log 2>&1
 transfer_exit_code=$?
 status="SUCCESSFULLY"
 if [ $transfer_exit_code -ne 0 ]; then
@@ -21,7 +25,7 @@ echo ">>>> Transfering file to hdfs complited $status !"
 echo ">>>> ###################################"
 echo ">>>> Waiting preprocesing with spark..."
 sleep 5
-docker exec spark-master ./spark/bin/spark-submit --packages org.postgresql:postgresql:42.2.10 ./spark.py > logs/spark_output.log 2>&1
+docker exec spark-master ./spark/bin/spark-submit --packages org.postgresql:postgresql:42.2.10 ./preprocessing.py > logs/spark_output.log 2>&1
 spark_exit_code=$?
 status="SUCCESSFULLY"
 if [ $spark_exit_code -ne 0 ]; then
