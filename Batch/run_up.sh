@@ -34,4 +34,6 @@ fi
 echo ">>>> Preprocesing complited $status !"
 echo ">>>> ###################################"
 
+#hive://hive@hive-server:10000/default
+
 

@@ -30,9 +30,13 @@ df = df.withColumn("year", F.year(F.col("time")))
 # Grupisanje po gradu, zimi i godini, računanje prosečnih temperatura i prividnih prosečnih temperatura
 result_df = df.groupBy("city", "year", "winter").agg(
     F.avg("temperature_2m_C").alias("avg_temperature"),
-    F.avg("apparent_temperature_C").alias("avg_apparent_temperature")
+    F.avg("apparent_temperature_C").alias("avg_apparent_temperature"),
+    F.avg("snow_depth_m").alias("avg_snow_depth"),
+    F.avg("snowfall_cm").alias("avg_snowfall")
 )
 
 result_df.write.mode("append").saveAsTable("winter")
+
+result_df.show()
 
 spark.stop()
