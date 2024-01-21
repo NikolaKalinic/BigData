@@ -7,27 +7,6 @@ from pyspark.sql.functions import udf
 from pyspark.sql.types import StringType
 from pyspark.sql.functions import avg
 
-# @udf(StringType())
-# def degrees_to_cardinal(direction_degrees):
-#     if 337.5 <= direction_degrees <= 360 or 0 <= direction_degrees < 22.5:
-#         return "N"
-#     elif 22.5 <= direction_degrees < 67.5:
-#         return "NE"
-#     elif 67.5 <= direction_degrees < 112.5:
-#         return "E"
-#     elif 112.5 <= direction_degrees < 157.5:
-#         return "SE"
-#     elif 157.5 <= direction_degrees < 202.5:
-#         return "S"
-#     elif 202.5 <= direction_degrees < 247.5:
-#         return "SW"
-#     elif 247.5 <= direction_degrees < 292.5:
-#         return "W"
-#     elif 292.5 <= direction_degrees < 337.5:
-#         return "NW"
-#     else:
-#         return "Unknown"
-
 def preprecesing(df,c):
     #renamed columns
     df = df.withColumnRenamed("temperature_2m (°C)", "temperature_2m_C")

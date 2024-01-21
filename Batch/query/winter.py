@@ -35,7 +35,7 @@ result_df = df.groupBy("city", "year", "winter").agg(
     F.avg("snowfall_cm").alias("avg_snowfall")
 )
 
-result_df.write.mode("append").saveAsTable("winter")
+result_df.write.mode("overwrite").saveAsTable("winter")
 
 result_df.show()
 

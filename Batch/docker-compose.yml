@@ -69,6 +69,7 @@ services:
     volumes:
       - ./preprocessing.py:/preprocessing.py
       - ./query/winter.py:/winter.py
+      - ./query/wind.py:/wind.py
     env_file:
       - ./hadoop-hive.env
     networks:
