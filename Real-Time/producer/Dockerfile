@@ -1,3 +1,11 @@
-FROM ubuntu
-RUN apt update && apt install python3-pip -y && pip3 install confluent_kafka && apt install cron && pip3 install requests
-CMD sleep infinity
+FROM python:3.7-slim
+
+WORKDIR /usr/src/app
+
+COPY . .
+RUN pip install --no-cache-dir -r requirements.txt
+
+ENV KAFKA_BROKER="localhost:9092"
+ENV SUBREDDIT="funny"
+
+CMD ["python", "-u", "./main.py"]

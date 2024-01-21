@@ -1,70 +1,18 @@
 version: "3"
+
 services:
-  zookeeper:
-    image: confluentinc/cp-zookeeper:4.1.3-1
-    container_name: zookeeper
-    tmpfs: "/datalog"
-    ports:
-      - "2181:2181"
-    expose:
-      - "2181"
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-
-  kafka:
-    image: confluentinc/cp-kafka:4.1.3-1
-    container_name: kafka
-    depends_on:
-      - zookeeper
-    ports:
-      - "29092:29092"
-      - "29093:29093"
-    expose:
-      - "9092"
-      - "29092"
-      - "29093"
-    environment:
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092, PLAINTEXT_HOST://localhost:29092, OUTSIDE_KUBE://host.docker.internal:29093
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT, PLAINTEXT_HOST:PLAINTEXT, OUTSIDE_KUBE:PLAINTEXT
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-    restart: always
-    # healthcheck:
-    #   test: ["CMD-SHELL", "echo 'exit' | nc -z kafka 9092"]
-    #   interval: 5s
-    #   timeout: 10s
-    #   retries: 5
-    # command: sh -c "sleep 30 && kafka-topics --create --zookeeper zookeeper:2181 --replication-factor 1 --partitions 2 --topic raw && sleep infinity"
-
-    #zavrsava sa exitom 0 smisli nesto
-
-  producer:
-    build: ./producer/
-    container_name: producer
-    volumes:
-      - ./producer/produce_event.py:/produce_event.py
-    #command: sleep infinity && echo "* * * * * /usr/bin/python3 /produce_event.py" >> crontab - && service cron start
-    command: sleep infinity
-
-  consumer:
-    build: ./consumer/
-    container_name: consumer
-    restart: always
-    volumes:
-      - ./consumer/consumer.py:/consumer.py
-    command: sleep infinity
-
-  # spark-master:
+  # spark-master-rt:
   #   image: bde2020/spark-master:3.0.1-hadoop3.2
-  #   container_name: spark-master
+  #   container_name: spark-master-rt
   #   ports:
   #     - 8080:8080
   #     - 7077:7077
   #   environment:
   #     - PYSPARK_PYTHON=python3
-  #     - PYSPARK_DRIVER_PYTHON=python3
   #   env_file:
   #     - ./hadoop.env
+  #   volumes:
+  #     - ../primeri:/spark/primeri
 
   # spark-worker1:
   #   image: bde2020/spark-worker:3.0.1-hadoop3.2
@@ -78,30 +26,53 @@ services:
   #   env_file:
   #     - ./hadoop.env
 
-  # spark-worker2:
-  #   image: bde2020/spark-worker:3.0.1-hadoop3.2
-  #   container_name: spark-worker2
-  #   depends_on:
-  #     - spark-master
-  #   environment:
-  #     - SPARK_MASTER=spark://spark-master:7077
-  #   ports:
-  #     - 8082:8081
-  #   env_file:
-  #     - ./hadoop.env
+  zoo1:
+    image: confluentinc/cp-zookeeper:4.1.3-1
+    container_name: zoo1
+    tmpfs: "/datalog"
+    ports:
+      - "2181:2181"
+    expose:
+      - "2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+    networks:
+      - asvsp
 
-  # postgresql:
-  #   image: postgres
-  #   container_name: postgresql
-  #   environment:
-  #     - POSTGRES_PASSWORD=admin
+  kafka1:
+    image: confluentinc/cp-kafka:4.1.3-1
+    container_name: kafka1
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: LISTENER_DOCKER_INTERNAL://kafka1:19092,LISTENER_DOCKER_EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: LISTENER_DOCKER_INTERNAL:PLAINTEXT,LISTENER_DOCKER_EXTERNAL:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: LISTENER_DOCKER_INTERNAL
+      KAFKA_ZOOKEEPER_CONNECT: "zoo1:2181"
+      KAFKA_BROKER_ID: 1
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
+    volumes:
+      - kafka1:/var/lib/kafka/data
+    depends_on:
+      - zoo1
+    networks:
+      - asvsp
 
-  # superset:
-  #   build: ./superset/
-  #   container_name: superset
-  #   environment:
-  #     - ADMIN_USERNAME=admin
-  #     - ADMIN_EMAIL=admin@superset.com
-  #     - ADMIN_PASSWORD=admin
-  #   ports:
-  #     - "8088:8088"
+  producer1:
+    build: ./producer
+    container_name: kafka_producer_1
+    restart: always
+    environment:
+      KAFKA_BROKER: "kafka1:19092"
+    depends_on:
+      - kafka1
+    networks:
+      - asvsp
+volumes:
+  zoo1:
+  kafka1:
+
+networks:
+  asvsp:
+    external: true
