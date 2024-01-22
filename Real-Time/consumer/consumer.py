@@ -10,11 +10,7 @@ def quiet_logs(sc):
   logger.LogManager.getLogger("org"). setLevel(logger.Level.ERROR)
   logger.LogManager.getLogger("akka").setLevel(logger.Level.ERROR)
 
-
-HDFS_NAMENODE = os.environ["CORE_CONF_fs_defaultFS"]
-HIVE_METASTORE_URIS = os.environ["HIVE_SITE_CONF_hive_metastore_uris"]
-
-conf = SparkConf().setAppName("batch-preprocessing").setMaster("spark://spark-master:7077")
+conf = SparkConf().setAppName("stream-preprocessing").setMaster("spark://spark-master-rt:7077")
 conf.set("spark.sql.warehouse.dir", "/hive/warehouse")
 conf.set("hive.metastore.uris", "thrift://hive-metastore:9083")
 
