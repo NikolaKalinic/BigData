@@ -1,3 +1,4 @@
 /data/*
 /Batch/logs/*
+/Real-Time/logs/*
 *.csv

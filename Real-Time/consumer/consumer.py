@@ -27,6 +27,8 @@ comments = spark \
   .format("kafka") \
   .option("kafka.bootstrap.servers", "kafka1:19092") \
   .option("subscribe", "raw") \
+  .option("group.id", "raw") \
+  .option("startingOffsets", "earliest") \
   .load()
 
 
@@ -116,17 +118,13 @@ parsed_df = parsed_df.withColumn("gust_kph", col("current.gust_kph"))
 parsed_df = parsed_df.drop("location", "current")
 
 # Write the parsed DataFrame to Hive
-query = parsed_df.writeStream.outputMode("update").trigger(processingTime='1 minute').foreachBatch(lambda batch_df, batch_id: batch_df.write.saveAsTable("Raw", mode="append")).start()
+query_raw = parsed_df.writeStream.outputMode("update").trigger(processingTime='1 minute').foreachBatch(lambda batch_df, batch_id: batch_df.write.saveAsTable("Raw", mode="append")).start()
 
 
-# query = comments \
-#     .selectExpr("CAST(value AS STRING)") \
-#     .select(from_json("value", schema).alias("json_value")) \
-#     .select("json_value.*") \
-#     .writeStream \
-#     .outputMode("update") \
-#     .trigger(processingTime='1 minute') \
-#     .foreachBatch(lambda batch_df, batch_id: batch_df.write.saveAsTable("Raw", mode="append")) \
-#     .start()
+parsed_df = parsed_df.drop("condition_icon")
+parsed_df = parsed_df.drop("condition_code")
 
-query.awaitTermination()
+query_processed = parsed_df.writeStream.outputMode("update").trigger(processingTime='1 minute').foreachBatch(lambda batch_df, batch_id: batch_df.write.saveAsTable("Processed", mode="append")).start()
+
+query_raw.awaitTermination()
+query_processed.awaitTermination()

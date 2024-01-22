@@ -2,7 +2,7 @@ Ivy Default Cache set to: /root/.ivy2/cache
 The jars for the packages stored in: /root/.ivy2/jars
 :: loading settings :: url = jar:file:/spark/jars/ivy-2.4.0.jar!/org/apache/ivy/core/settings/ivysettings.xml
 org.apache.spark#spark-sql-kafka-0-10_2.12 added as a dependency
-:: resolving dependencies :: org.apache.spark#spark-submit-parent-e47f254f-ef08-44ce-a271-dd59a84dad0b;1.0
+:: resolving dependencies :: org.apache.spark#spark-submit-parent-4d155610-8ecf-4e2f-86eb-a68666edf5d3;1.0
 	confs: [default]
 	found org.apache.spark#spark-sql-kafka-0-10_2.12;3.0.1 in central
 	found org.apache.spark#spark-token-provider-kafka-0-10_2.12;3.0.1 in central
@@ -14,24 +14,24 @@ org.apache.spark#spark-sql-kafka-0-10_2.12 added as a dependency
 	found org.spark-project.spark#unused;1.0.0 in central
 	found org.apache.commons#commons-pool2;2.6.2 in central
 downloading https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_2.12/3.0.1/spark-sql-kafka-0-10_2.12-3.0.1.jar ...
-	[SUCCESSFUL ] org.apache.spark#spark-sql-kafka-0-10_2.12;3.0.1!spark-sql-kafka-0-10_2.12.jar (335ms)
+	[SUCCESSFUL ] org.apache.spark#spark-sql-kafka-0-10_2.12;3.0.1!spark-sql-kafka-0-10_2.12.jar (380ms)
 downloading https://repo1.maven.org/maven2/org/apache/spark/spark-token-provider-kafka-0-10_2.12/3.0.1/spark-token-provider-kafka-0-10_2.12-3.0.1.jar ...
-	[SUCCESSFUL ] org.apache.spark#spark-token-provider-kafka-0-10_2.12;3.0.1!spark-token-provider-kafka-0-10_2.12.jar (79ms)
+	[SUCCESSFUL ] org.apache.spark#spark-token-provider-kafka-0-10_2.12;3.0.1!spark-token-provider-kafka-0-10_2.12.jar (93ms)
 downloading https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/2.4.1/kafka-clients-2.4.1.jar ...
-	[SUCCESSFUL ] org.apache.kafka#kafka-clients;2.4.1!kafka-clients.jar (2936ms)
+	[SUCCESSFUL ] org.apache.kafka#kafka-clients;2.4.1!kafka-clients.jar (3399ms)
 downloading https://repo1.maven.org/maven2/org/apache/commons/commons-pool2/2.6.2/commons-pool2-2.6.2.jar ...
-	[SUCCESSFUL ] org.apache.commons#commons-pool2;2.6.2!commons-pool2.jar (147ms)
+	[SUCCESSFUL ] org.apache.commons#commons-pool2;2.6.2!commons-pool2.jar (181ms)
 downloading https://repo1.maven.org/maven2/org/spark-project/spark/unused/1.0.0/unused-1.0.0.jar ...
-	[SUCCESSFUL ] org.spark-project.spark#unused;1.0.0!unused.jar (31ms)
+	[SUCCESSFUL ] org.spark-project.spark#unused;1.0.0!unused.jar (35ms)
 downloading https://repo1.maven.org/maven2/com/github/luben/zstd-jni/1.4.4-3/zstd-jni-1.4.4-3.jar ...
-	[SUCCESSFUL ] com.github.luben#zstd-jni;1.4.4-3!zstd-jni.jar (3779ms)
+	[SUCCESSFUL ] com.github.luben#zstd-jni;1.4.4-3!zstd-jni.jar (4901ms)
 downloading https://repo1.maven.org/maven2/org/lz4/lz4-java/1.7.1/lz4-java-1.7.1.jar ...
-	[SUCCESSFUL ] org.lz4#lz4-java;1.7.1!lz4-java.jar (612ms)
+	[SUCCESSFUL ] org.lz4#lz4-java;1.7.1!lz4-java.jar (671ms)
 downloading https://repo1.maven.org/maven2/org/xerial/snappy/snappy-java/1.1.7.5/snappy-java-1.1.7.5.jar ...
-	[SUCCESSFUL ] org.xerial.snappy#snappy-java;1.1.7.5!snappy-java.jar(bundle) (1752ms)
+	[SUCCESSFUL ] org.xerial.snappy#snappy-java;1.1.7.5!snappy-java.jar(bundle) (1998ms)
 downloading https://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.jar ...
-	[SUCCESSFUL ] org.slf4j#slf4j-api;1.7.30!slf4j-api.jar (86ms)
-:: resolution report :: resolve 5555ms :: artifacts dl 9763ms
+	[SUCCESSFUL ] org.slf4j#slf4j-api;1.7.30!slf4j-api.jar (84ms)
+:: resolution report :: resolve 5061ms :: artifacts dl 11749ms
 	:: modules in use:
 	com.github.luben#zstd-jni;1.4.4-3 from central in [default]
 	org.apache.commons#commons-pool2;2.6.2 from central in [default]
@@ -48,90 +48,90 @@ downloading https://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.30/slf4j-api-
 	---------------------------------------------------------------------
 	|      default     |   9   |   9   |   9   |   0   ||   9   |   9   |
 	---------------------------------------------------------------------
-:: retrieving :: org.apache.spark#spark-submit-parent-e47f254f-ef08-44ce-a271-dd59a84dad0b
+:: retrieving :: org.apache.spark#spark-submit-parent-4d155610-8ecf-4e2f-86eb-a68666edf5d3
 	confs: [default]
-	9 artifacts copied, 0 already retrieved (10393kB/20ms)
-24/01/22 11:37:02 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+	9 artifacts copied, 0 already retrieved (10393kB/18ms)
+24/01/22 13:43:32 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
 Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
-24/01/22 11:37:03 INFO SparkContext: Running Spark version 3.0.1
-24/01/22 11:37:03 INFO ResourceUtils: ==============================================================
-24/01/22 11:37:03 INFO ResourceUtils: Resources for spark.driver:
+24/01/22 13:43:32 INFO SparkContext: Running Spark version 3.0.1
+24/01/22 13:43:32 INFO ResourceUtils: ==============================================================
+24/01/22 13:43:32 INFO ResourceUtils: Resources for spark.driver:
 
-24/01/22 11:37:03 INFO ResourceUtils: ==============================================================
-24/01/22 11:37:03 INFO SparkContext: Submitted application: batch-preprocessing
-24/01/22 11:37:03 INFO SecurityManager: Changing view acls to: root
-24/01/22 11:37:03 INFO SecurityManager: Changing modify acls to: root
-24/01/22 11:37:03 INFO SecurityManager: Changing view acls groups to: 
-24/01/22 11:37:03 INFO SecurityManager: Changing modify acls groups to: 
-24/01/22 11:37:03 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(root); groups with view permissions: Set(); users  with modify permissions: Set(root); groups with modify permissions: Set()
-24/01/22 11:37:03 INFO Utils: Successfully started service 'sparkDriver' on port 41643.
-24/01/22 11:37:03 INFO SparkEnv: Registering MapOutputTracker
-24/01/22 11:37:03 INFO SparkEnv: Registering BlockManagerMaster
-24/01/22 11:37:03 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
-24/01/22 11:37:03 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
-24/01/22 11:37:03 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
-24/01/22 11:37:03 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-1a4f1db7-a02b-440c-9b29-515975f02393
-24/01/22 11:37:03 INFO MemoryStore: MemoryStore started with capacity 366.3 MiB
-24/01/22 11:37:03 INFO SparkEnv: Registering OutputCommitCoordinator
-24/01/22 11:37:04 INFO Utils: Successfully started service 'SparkUI' on port 4040.
-24/01/22 11:37:04 INFO SparkUI: Bound SparkUI to 0.0.0.0, and started at http://9a0e87d071e3:4040
-24/01/22 11:37:04 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.spark_spark-sql-kafka-0-10_2.12-3.0.1.jar at spark://9a0e87d071e3:41643/jars/org.apache.spark_spark-sql-kafka-0-10_2.12-3.0.1.jar with timestamp 1705923424138
-24/01/22 11:37:04 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.spark_spark-token-provider-kafka-0-10_2.12-3.0.1.jar at spark://9a0e87d071e3:41643/jars/org.apache.spark_spark-token-provider-kafka-0-10_2.12-3.0.1.jar with timestamp 1705923424139
-24/01/22 11:37:04 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.kafka_kafka-clients-2.4.1.jar at spark://9a0e87d071e3:41643/jars/org.apache.kafka_kafka-clients-2.4.1.jar with timestamp 1705923424139
-24/01/22 11:37:04 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.commons_commons-pool2-2.6.2.jar at spark://9a0e87d071e3:41643/jars/org.apache.commons_commons-pool2-2.6.2.jar with timestamp 1705923424139
-24/01/22 11:37:04 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.spark-project.spark_unused-1.0.0.jar at spark://9a0e87d071e3:41643/jars/org.spark-project.spark_unused-1.0.0.jar with timestamp 1705923424139
-24/01/22 11:37:04 INFO SparkContext: Added JAR file:///root/.ivy2/jars/com.github.luben_zstd-jni-1.4.4-3.jar at spark://9a0e87d071e3:41643/jars/com.github.luben_zstd-jni-1.4.4-3.jar with timestamp 1705923424139
-24/01/22 11:37:04 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.lz4_lz4-java-1.7.1.jar at spark://9a0e87d071e3:41643/jars/org.lz4_lz4-java-1.7.1.jar with timestamp 1705923424139
-24/01/22 11:37:04 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.xerial.snappy_snappy-java-1.1.7.5.jar at spark://9a0e87d071e3:41643/jars/org.xerial.snappy_snappy-java-1.1.7.5.jar with timestamp 1705923424139
-24/01/22 11:37:04 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.slf4j_slf4j-api-1.7.30.jar at spark://9a0e87d071e3:41643/jars/org.slf4j_slf4j-api-1.7.30.jar with timestamp 1705923424140
-24/01/22 11:37:04 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.spark_spark-sql-kafka-0-10_2.12-3.0.1.jar at spark://9a0e87d071e3:41643/files/org.apache.spark_spark-sql-kafka-0-10_2.12-3.0.1.jar with timestamp 1705923424141
-24/01/22 11:37:04 INFO Utils: Copying /root/.ivy2/jars/org.apache.spark_spark-sql-kafka-0-10_2.12-3.0.1.jar to /tmp/spark-1e8c9198-82a6-4795-8387-9b5a96f0c69c/userFiles-a67b0e32-326f-49c6-abbf-b0ae1a57fc19/org.apache.spark_spark-sql-kafka-0-10_2.12-3.0.1.jar
-24/01/22 11:37:04 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.spark_spark-token-provider-kafka-0-10_2.12-3.0.1.jar at spark://9a0e87d071e3:41643/files/org.apache.spark_spark-token-provider-kafka-0-10_2.12-3.0.1.jar with timestamp 1705923424151
-24/01/22 11:37:04 INFO Utils: Copying /root/.ivy2/jars/org.apache.spark_spark-token-provider-kafka-0-10_2.12-3.0.1.jar to /tmp/spark-1e8c9198-82a6-4795-8387-9b5a96f0c69c/userFiles-a67b0e32-326f-49c6-abbf-b0ae1a57fc19/org.apache.spark_spark-token-provider-kafka-0-10_2.12-3.0.1.jar
-24/01/22 11:37:04 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.kafka_kafka-clients-2.4.1.jar at spark://9a0e87d071e3:41643/files/org.apache.kafka_kafka-clients-2.4.1.jar with timestamp 1705923424153
-24/01/22 11:37:04 INFO Utils: Copying /root/.ivy2/jars/org.apache.kafka_kafka-clients-2.4.1.jar to /tmp/spark-1e8c9198-82a6-4795-8387-9b5a96f0c69c/userFiles-a67b0e32-326f-49c6-abbf-b0ae1a57fc19/org.apache.kafka_kafka-clients-2.4.1.jar
-24/01/22 11:37:04 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.commons_commons-pool2-2.6.2.jar at spark://9a0e87d071e3:41643/files/org.apache.commons_commons-pool2-2.6.2.jar with timestamp 1705923424158
-24/01/22 11:37:04 INFO Utils: Copying /root/.ivy2/jars/org.apache.commons_commons-pool2-2.6.2.jar to /tmp/spark-1e8c9198-82a6-4795-8387-9b5a96f0c69c/userFiles-a67b0e32-326f-49c6-abbf-b0ae1a57fc19/org.apache.commons_commons-pool2-2.6.2.jar
-24/01/22 11:37:04 INFO SparkContext: Added file file:///root/.ivy2/jars/org.spark-project.spark_unused-1.0.0.jar at spark://9a0e87d071e3:41643/files/org.spark-project.spark_unused-1.0.0.jar with timestamp 1705923424161
-24/01/22 11:37:04 INFO Utils: Copying /root/.ivy2/jars/org.spark-project.spark_unused-1.0.0.jar to /tmp/spark-1e8c9198-82a6-4795-8387-9b5a96f0c69c/userFiles-a67b0e32-326f-49c6-abbf-b0ae1a57fc19/org.spark-project.spark_unused-1.0.0.jar
-24/01/22 11:37:04 INFO SparkContext: Added file file:///root/.ivy2/jars/com.github.luben_zstd-jni-1.4.4-3.jar at spark://9a0e87d071e3:41643/files/com.github.luben_zstd-jni-1.4.4-3.jar with timestamp 1705923424163
-24/01/22 11:37:04 INFO Utils: Copying /root/.ivy2/jars/com.github.luben_zstd-jni-1.4.4-3.jar to /tmp/spark-1e8c9198-82a6-4795-8387-9b5a96f0c69c/userFiles-a67b0e32-326f-49c6-abbf-b0ae1a57fc19/com.github.luben_zstd-jni-1.4.4-3.jar
-24/01/22 11:37:04 INFO SparkContext: Added file file:///root/.ivy2/jars/org.lz4_lz4-java-1.7.1.jar at spark://9a0e87d071e3:41643/files/org.lz4_lz4-java-1.7.1.jar with timestamp 1705923424168
-24/01/22 11:37:04 INFO Utils: Copying /root/.ivy2/jars/org.lz4_lz4-java-1.7.1.jar to /tmp/spark-1e8c9198-82a6-4795-8387-9b5a96f0c69c/userFiles-a67b0e32-326f-49c6-abbf-b0ae1a57fc19/org.lz4_lz4-java-1.7.1.jar
-24/01/22 11:37:04 INFO SparkContext: Added file file:///root/.ivy2/jars/org.xerial.snappy_snappy-java-1.1.7.5.jar at spark://9a0e87d071e3:41643/files/org.xerial.snappy_snappy-java-1.1.7.5.jar with timestamp 1705923424171
-24/01/22 11:37:04 INFO Utils: Copying /root/.ivy2/jars/org.xerial.snappy_snappy-java-1.1.7.5.jar to /tmp/spark-1e8c9198-82a6-4795-8387-9b5a96f0c69c/userFiles-a67b0e32-326f-49c6-abbf-b0ae1a57fc19/org.xerial.snappy_snappy-java-1.1.7.5.jar
-24/01/22 11:37:04 INFO SparkContext: Added file file:///root/.ivy2/jars/org.slf4j_slf4j-api-1.7.30.jar at spark://9a0e87d071e3:41643/files/org.slf4j_slf4j-api-1.7.30.jar with timestamp 1705923424175
-24/01/22 11:37:04 INFO Utils: Copying /root/.ivy2/jars/org.slf4j_slf4j-api-1.7.30.jar to /tmp/spark-1e8c9198-82a6-4795-8387-9b5a96f0c69c/userFiles-a67b0e32-326f-49c6-abbf-b0ae1a57fc19/org.slf4j_slf4j-api-1.7.30.jar
-24/01/22 11:37:04 WARN SparkContext: Please ensure that the number of slots available on your executors is limited by the number of cores to task cpus and not another custom resource. If cores is not the limiting resource then dynamic allocation will not work properly!
-24/01/22 11:37:04 INFO StandaloneAppClient$ClientEndpoint: Connecting to master spark://spark-master:7077...
-24/01/22 11:37:04 INFO TransportClientFactory: Successfully created connection to spark-master/172.18.0.3:7077 after 20 ms (0 ms spent in bootstraps)
-24/01/22 11:37:04 INFO StandaloneSchedulerBackend: Connected to Spark cluster with app ID app-20240122113704-0001
-24/01/22 11:37:04 INFO StandaloneAppClient$ClientEndpoint: Executor added: app-20240122113704-0001/0 on worker-20240122113527-172.18.0.11-33167 (172.18.0.11:33167) with 8 core(s)
-24/01/22 11:37:04 INFO StandaloneSchedulerBackend: Granted executor ID app-20240122113704-0001/0 on hostPort 172.18.0.11:33167 with 8 core(s), 1024.0 MiB RAM
-24/01/22 11:37:04 INFO StandaloneAppClient$ClientEndpoint: Executor added: app-20240122113704-0001/1 on worker-20240122113527-172.18.0.12-44007 (172.18.0.12:44007) with 8 core(s)
-24/01/22 11:37:04 INFO StandaloneSchedulerBackend: Granted executor ID app-20240122113704-0001/1 on hostPort 172.18.0.12:44007 with 8 core(s), 1024.0 MiB RAM
-24/01/22 11:37:04 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 33157.
-24/01/22 11:37:04 INFO NettyBlockTransferService: Server created on 9a0e87d071e3:33157
-24/01/22 11:37:04 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
-24/01/22 11:37:04 INFO StandaloneAppClient$ClientEndpoint: Executor updated: app-20240122113704-0001/1 is now RUNNING
-24/01/22 11:37:04 INFO StandaloneAppClient$ClientEndpoint: Executor updated: app-20240122113704-0001/0 is now RUNNING
-24/01/22 11:37:04 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, 9a0e87d071e3, 33157, None)
-24/01/22 11:37:04 INFO BlockManagerMasterEndpoint: Registering block manager 9a0e87d071e3:33157 with 366.3 MiB RAM, BlockManagerId(driver, 9a0e87d071e3, 33157, None)
-24/01/22 11:37:04 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, 9a0e87d071e3, 33157, None)
-24/01/22 11:37:04 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, 9a0e87d071e3, 33157, None)
-24/01/22 11:37:04 INFO StandaloneSchedulerBackend: SchedulerBackend is ready for scheduling beginning after reached minRegisteredResourcesRatio: 0.0
-24/01/22 11:37:04 INFO SharedState: Setting hive.metastore.warehouse.dir ('null') to the value of spark.sql.warehouse.dir ('/hive/warehouse').
-24/01/22 11:37:04 INFO SharedState: Warehouse path is '/hive/warehouse'.
-24/01/22 11:37:14 INFO metastore: Trying to connect to metastore with URI thrift://hive-metastore:9083
-24/01/22 11:37:14 INFO metastore: Opened a connection to metastore, current connections: 1
-24/01/22 11:37:14 INFO metastore: Connected to metastore.
-24/01/22 11:37:17 INFO metastore: Mestastore configuration hive.metastore.filter.hook changed from org.apache.hadoop.hive.metastore.DefaultMetaStoreFilterHookImpl to org.apache.hadoop.hive.ql.security.authorization.plugin.AuthorizationMetaStoreFilterHook
-24/01/22 11:37:17 INFO metastore: Closed a connection to metastore, current connections: 0
-24/01/22 11:37:17 INFO metastore: Trying to connect to metastore with URI thrift://hive-metastore:9083
-24/01/22 11:37:17 INFO metastore: Opened a connection to metastore, current connections: 1
-24/01/22 11:37:17 INFO metastore: Connected to metastore.
-24/01/22 11:37:17 INFO metastore: Trying to connect to metastore with URI thrift://hive-metastore:9083
-24/01/22 11:37:17 INFO metastore: Opened a connection to metastore, current connections: 2
-24/01/22 11:37:17 INFO metastore: Connected to metastore.
-24/01/22 11:38:33 ERROR TaskSchedulerImpl: Lost executor 0 on 172.18.0.11: Remote RPC client disassociated. Likely due to containers exceeding thresholds, or network issues. Check driver logs for WARN messages.
-24/01/22 11:38:33 ERROR TaskSchedulerImpl: Lost executor 1 on 172.18.0.12: worker lost
+24/01/22 13:43:32 INFO ResourceUtils: ==============================================================
+24/01/22 13:43:32 INFO SparkContext: Submitted application: batch-preprocessing
+24/01/22 13:43:32 INFO SecurityManager: Changing view acls to: root
+24/01/22 13:43:32 INFO SecurityManager: Changing modify acls to: root
+24/01/22 13:43:32 INFO SecurityManager: Changing view acls groups to: 
+24/01/22 13:43:32 INFO SecurityManager: Changing modify acls groups to: 
+24/01/22 13:43:32 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(root); groups with view permissions: Set(); users  with modify permissions: Set(root); groups with modify permissions: Set()
+24/01/22 13:43:32 INFO Utils: Successfully started service 'sparkDriver' on port 43021.
+24/01/22 13:43:33 INFO SparkEnv: Registering MapOutputTracker
+24/01/22 13:43:33 INFO SparkEnv: Registering BlockManagerMaster
+24/01/22 13:43:33 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+24/01/22 13:43:33 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+24/01/22 13:43:33 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+24/01/22 13:43:33 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-7c4d593e-fab2-4bae-b46d-2f13bc5ca4f5
+24/01/22 13:43:33 INFO MemoryStore: MemoryStore started with capacity 366.3 MiB
+24/01/22 13:43:33 INFO SparkEnv: Registering OutputCommitCoordinator
+24/01/22 13:43:33 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+24/01/22 13:43:33 INFO SparkUI: Bound SparkUI to 0.0.0.0, and started at http://5794498ce9e2:4040
+24/01/22 13:43:33 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.spark_spark-sql-kafka-0-10_2.12-3.0.1.jar at spark://5794498ce9e2:43021/jars/org.apache.spark_spark-sql-kafka-0-10_2.12-3.0.1.jar with timestamp 1705931013347
+24/01/22 13:43:33 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.spark_spark-token-provider-kafka-0-10_2.12-3.0.1.jar at spark://5794498ce9e2:43021/jars/org.apache.spark_spark-token-provider-kafka-0-10_2.12-3.0.1.jar with timestamp 1705931013348
+24/01/22 13:43:33 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.kafka_kafka-clients-2.4.1.jar at spark://5794498ce9e2:43021/jars/org.apache.kafka_kafka-clients-2.4.1.jar with timestamp 1705931013348
+24/01/22 13:43:33 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.commons_commons-pool2-2.6.2.jar at spark://5794498ce9e2:43021/jars/org.apache.commons_commons-pool2-2.6.2.jar with timestamp 1705931013348
+24/01/22 13:43:33 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.spark-project.spark_unused-1.0.0.jar at spark://5794498ce9e2:43021/jars/org.spark-project.spark_unused-1.0.0.jar with timestamp 1705931013348
+24/01/22 13:43:33 INFO SparkContext: Added JAR file:///root/.ivy2/jars/com.github.luben_zstd-jni-1.4.4-3.jar at spark://5794498ce9e2:43021/jars/com.github.luben_zstd-jni-1.4.4-3.jar with timestamp 1705931013348
+24/01/22 13:43:33 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.lz4_lz4-java-1.7.1.jar at spark://5794498ce9e2:43021/jars/org.lz4_lz4-java-1.7.1.jar with timestamp 1705931013348
+24/01/22 13:43:33 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.xerial.snappy_snappy-java-1.1.7.5.jar at spark://5794498ce9e2:43021/jars/org.xerial.snappy_snappy-java-1.1.7.5.jar with timestamp 1705931013348
+24/01/22 13:43:33 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.slf4j_slf4j-api-1.7.30.jar at spark://5794498ce9e2:43021/jars/org.slf4j_slf4j-api-1.7.30.jar with timestamp 1705931013348
+24/01/22 13:43:33 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.spark_spark-sql-kafka-0-10_2.12-3.0.1.jar at spark://5794498ce9e2:43021/files/org.apache.spark_spark-sql-kafka-0-10_2.12-3.0.1.jar with timestamp 1705931013349
+24/01/22 13:43:33 INFO Utils: Copying /root/.ivy2/jars/org.apache.spark_spark-sql-kafka-0-10_2.12-3.0.1.jar to /tmp/spark-19a4daf1-ed4d-43aa-9111-b6915ec7b72b/userFiles-61dd014a-262c-47fd-91c6-3ce1354312ce/org.apache.spark_spark-sql-kafka-0-10_2.12-3.0.1.jar
+24/01/22 13:43:33 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.spark_spark-token-provider-kafka-0-10_2.12-3.0.1.jar at spark://5794498ce9e2:43021/files/org.apache.spark_spark-token-provider-kafka-0-10_2.12-3.0.1.jar with timestamp 1705931013358
+24/01/22 13:43:33 INFO Utils: Copying /root/.ivy2/jars/org.apache.spark_spark-token-provider-kafka-0-10_2.12-3.0.1.jar to /tmp/spark-19a4daf1-ed4d-43aa-9111-b6915ec7b72b/userFiles-61dd014a-262c-47fd-91c6-3ce1354312ce/org.apache.spark_spark-token-provider-kafka-0-10_2.12-3.0.1.jar
+24/01/22 13:43:33 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.kafka_kafka-clients-2.4.1.jar at spark://5794498ce9e2:43021/files/org.apache.kafka_kafka-clients-2.4.1.jar with timestamp 1705931013360
+24/01/22 13:43:33 INFO Utils: Copying /root/.ivy2/jars/org.apache.kafka_kafka-clients-2.4.1.jar to /tmp/spark-19a4daf1-ed4d-43aa-9111-b6915ec7b72b/userFiles-61dd014a-262c-47fd-91c6-3ce1354312ce/org.apache.kafka_kafka-clients-2.4.1.jar
+24/01/22 13:43:33 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.commons_commons-pool2-2.6.2.jar at spark://5794498ce9e2:43021/files/org.apache.commons_commons-pool2-2.6.2.jar with timestamp 1705931013364
+24/01/22 13:43:33 INFO Utils: Copying /root/.ivy2/jars/org.apache.commons_commons-pool2-2.6.2.jar to /tmp/spark-19a4daf1-ed4d-43aa-9111-b6915ec7b72b/userFiles-61dd014a-262c-47fd-91c6-3ce1354312ce/org.apache.commons_commons-pool2-2.6.2.jar
+24/01/22 13:43:33 INFO SparkContext: Added file file:///root/.ivy2/jars/org.spark-project.spark_unused-1.0.0.jar at spark://5794498ce9e2:43021/files/org.spark-project.spark_unused-1.0.0.jar with timestamp 1705931013366
+24/01/22 13:43:33 INFO Utils: Copying /root/.ivy2/jars/org.spark-project.spark_unused-1.0.0.jar to /tmp/spark-19a4daf1-ed4d-43aa-9111-b6915ec7b72b/userFiles-61dd014a-262c-47fd-91c6-3ce1354312ce/org.spark-project.spark_unused-1.0.0.jar
+24/01/22 13:43:33 INFO SparkContext: Added file file:///root/.ivy2/jars/com.github.luben_zstd-jni-1.4.4-3.jar at spark://5794498ce9e2:43021/files/com.github.luben_zstd-jni-1.4.4-3.jar with timestamp 1705931013368
+24/01/22 13:43:33 INFO Utils: Copying /root/.ivy2/jars/com.github.luben_zstd-jni-1.4.4-3.jar to /tmp/spark-19a4daf1-ed4d-43aa-9111-b6915ec7b72b/userFiles-61dd014a-262c-47fd-91c6-3ce1354312ce/com.github.luben_zstd-jni-1.4.4-3.jar
+24/01/22 13:43:33 INFO SparkContext: Added file file:///root/.ivy2/jars/org.lz4_lz4-java-1.7.1.jar at spark://5794498ce9e2:43021/files/org.lz4_lz4-java-1.7.1.jar with timestamp 1705931013372
+24/01/22 13:43:33 INFO Utils: Copying /root/.ivy2/jars/org.lz4_lz4-java-1.7.1.jar to /tmp/spark-19a4daf1-ed4d-43aa-9111-b6915ec7b72b/userFiles-61dd014a-262c-47fd-91c6-3ce1354312ce/org.lz4_lz4-java-1.7.1.jar
+24/01/22 13:43:33 INFO SparkContext: Added file file:///root/.ivy2/jars/org.xerial.snappy_snappy-java-1.1.7.5.jar at spark://5794498ce9e2:43021/files/org.xerial.snappy_snappy-java-1.1.7.5.jar with timestamp 1705931013375
+24/01/22 13:43:33 INFO Utils: Copying /root/.ivy2/jars/org.xerial.snappy_snappy-java-1.1.7.5.jar to /tmp/spark-19a4daf1-ed4d-43aa-9111-b6915ec7b72b/userFiles-61dd014a-262c-47fd-91c6-3ce1354312ce/org.xerial.snappy_snappy-java-1.1.7.5.jar
+24/01/22 13:43:33 INFO SparkContext: Added file file:///root/.ivy2/jars/org.slf4j_slf4j-api-1.7.30.jar at spark://5794498ce9e2:43021/files/org.slf4j_slf4j-api-1.7.30.jar with timestamp 1705931013378
+24/01/22 13:43:33 INFO Utils: Copying /root/.ivy2/jars/org.slf4j_slf4j-api-1.7.30.jar to /tmp/spark-19a4daf1-ed4d-43aa-9111-b6915ec7b72b/userFiles-61dd014a-262c-47fd-91c6-3ce1354312ce/org.slf4j_slf4j-api-1.7.30.jar
+24/01/22 13:43:33 WARN SparkContext: Please ensure that the number of slots available on your executors is limited by the number of cores to task cpus and not another custom resource. If cores is not the limiting resource then dynamic allocation will not work properly!
+24/01/22 13:43:33 INFO StandaloneAppClient$ClientEndpoint: Connecting to master spark://spark-master:7077...
+24/01/22 13:43:33 INFO TransportClientFactory: Successfully created connection to spark-master/172.18.0.10:7077 after 25 ms (0 ms spent in bootstraps)
+24/01/22 13:43:33 INFO StandaloneSchedulerBackend: Connected to Spark cluster with app ID app-20240122134333-0001
+24/01/22 13:43:33 INFO StandaloneAppClient$ClientEndpoint: Executor added: app-20240122134333-0001/0 on worker-20240122134155-172.18.0.13-40733 (172.18.0.13:40733) with 8 core(s)
+24/01/22 13:43:33 INFO StandaloneSchedulerBackend: Granted executor ID app-20240122134333-0001/0 on hostPort 172.18.0.13:40733 with 8 core(s), 1024.0 MiB RAM
+24/01/22 13:43:33 INFO StandaloneAppClient$ClientEndpoint: Executor added: app-20240122134333-0001/1 on worker-20240122134155-172.18.0.12-43709 (172.18.0.12:43709) with 8 core(s)
+24/01/22 13:43:33 INFO StandaloneSchedulerBackend: Granted executor ID app-20240122134333-0001/1 on hostPort 172.18.0.12:43709 with 8 core(s), 1024.0 MiB RAM
+24/01/22 13:43:33 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 44295.
+24/01/22 13:43:33 INFO NettyBlockTransferService: Server created on 5794498ce9e2:44295
+24/01/22 13:43:33 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+24/01/22 13:43:33 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, 5794498ce9e2, 44295, None)
+24/01/22 13:43:33 INFO BlockManagerMasterEndpoint: Registering block manager 5794498ce9e2:44295 with 366.3 MiB RAM, BlockManagerId(driver, 5794498ce9e2, 44295, None)
+24/01/22 13:43:33 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, 5794498ce9e2, 44295, None)
+24/01/22 13:43:33 INFO StandaloneAppClient$ClientEndpoint: Executor updated: app-20240122134333-0001/1 is now RUNNING
+24/01/22 13:43:33 INFO StandaloneAppClient$ClientEndpoint: Executor updated: app-20240122134333-0001/0 is now RUNNING
+24/01/22 13:43:33 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, 5794498ce9e2, 44295, None)
+24/01/22 13:43:33 INFO StandaloneSchedulerBackend: SchedulerBackend is ready for scheduling beginning after reached minRegisteredResourcesRatio: 0.0
+24/01/22 13:43:34 INFO SharedState: Setting hive.metastore.warehouse.dir ('null') to the value of spark.sql.warehouse.dir ('/hive/warehouse').
+24/01/22 13:43:34 INFO SharedState: Warehouse path is '/hive/warehouse'.
+24/01/22 13:43:44 INFO metastore: Trying to connect to metastore with URI thrift://hive-metastore:9083
+24/01/22 13:43:44 INFO metastore: Opened a connection to metastore, current connections: 1
+24/01/22 13:43:44 INFO metastore: Connected to metastore.
+24/01/22 13:43:51 INFO metastore: Mestastore configuration hive.metastore.filter.hook changed from org.apache.hadoop.hive.metastore.DefaultMetaStoreFilterHookImpl to org.apache.hadoop.hive.ql.security.authorization.plugin.AuthorizationMetaStoreFilterHook
+24/01/22 13:43:51 INFO metastore: Closed a connection to metastore, current connections: 0
+24/01/22 13:43:51 INFO metastore: Trying to connect to metastore with URI thrift://hive-metastore:9083
+24/01/22 13:43:51 INFO metastore: Opened a connection to metastore, current connections: 1
+24/01/22 13:43:51 INFO metastore: Connected to metastore.
+24/01/22 13:43:51 INFO metastore: Trying to connect to metastore with URI thrift://hive-metastore:9083
+24/01/22 13:43:51 INFO metastore: Opened a connection to metastore, current connections: 2
+24/01/22 13:43:51 INFO metastore: Connected to metastore.
+24/01/22 13:47:42 ERROR TaskSchedulerImpl: Lost executor 1 on 172.18.0.12: worker lost
+24/01/22 13:47:42 ERROR TaskSchedulerImpl: Lost executor 0 on 172.18.0.13: worker lost
