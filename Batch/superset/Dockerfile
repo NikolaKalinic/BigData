@@ -14,4 +14,4 @@ ENV SUPERSET_CONFIG_PATH /app/superset_config.py
 
 USER superset
 
-CMD superset fab create-admin --username $ADMIN_USERNAME --firstname Superset --lastname Admin --email $ADMIN_EMAIL --password $ADMIN_PASSWORD && superset db upgrade && superset superset init && /usr/bin/run-server.sh
+CMD superset fab create-admin --username $ADMIN_USERNAME --firstname Superset --lastname Admin --email $ADMIN_EMAIL --password $ADMIN_PASSWORD && superset db upgrade && superset superset init && superset set-database-uri --uri "$HIVE_CONNECTION" --database-name "Hive" &&/usr/bin/run-server.sh
