@@ -13,7 +13,6 @@ services:
       - ./hadoop.env
     volumes:
       - ./consumer/consumer.py:/consumer.py
-      - ./consumer/consumer1.py:/consumer1.py
     networks:
       - asvsp
 
