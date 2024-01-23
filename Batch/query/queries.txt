@@ -1,0 +1,74 @@
+1. Prosecna godisnja temperatura po gradovima
+
+SELECT
+  DISTINCT city,
+  EXTRACT(YEAR FROM time) AS year,
+  AVG(temperature_2m_c) OVER (PARTITION BY city, EXTRACT(YEAR FROM time)) AS avg_temp_yearly
+FROM
+  data;
+
+2. Top 3 najvetrovitija dana tokom zime
+
+SELECT
+  city,
+  day,
+  avg_wind_speed_10m_kmh,
+  RANK() OVER (PARTITION BY city ORDER BY avg_wind_speed_10m_kmh DESC) AS rank_windiest_days
+FROM
+  wind
+WHERE
+  EXTRACT(MONTH FROM day) IN (12, 1, 2)
+ORDER BY
+  city, rank_windiest_days
+LIMIT 3;
+
+3. Broj oblačnih dana u poređenju sa prosečnom količinom padavina tokom cele godine
+
+SELECT
+  city,
+  year,
+  cloudy_days,
+  total_precipitation_mm,
+  RANK() OVER (PARTITION BY year ORDER BY cloudy_days DESC) AS rank_cloudy_days
+FROM
+  cloudy_season;
+
+4.Top 3 dana sa najvećom brzinom vetra na 100m visine za svaki grad
+
+WITH ranked_wind AS (
+  SELECT
+    city,
+    time,
+    wind_speed_100m_kmh,
+    RANK() OVER (PARTITION BY city ORDER BY wind_speed_100m_kmh DESC) AS wind_rank
+  FROM
+    data
+)
+SELECT
+  city,
+  time,
+  wind_speed_100m_kmh
+FROM
+  ranked_wind
+WHERE
+  wind_rank <= 3;
+  
+  
+5. Pronadji godinu sa najvise padavina za svaki grad
+
+SELECT
+  city,
+  year,
+  total_precipitation_mm
+FROM (
+  SELECT
+    city,
+    year,
+    total_precipitation_mm,
+    RANK() OVER (PARTITION BY city ORDER BY total_precipitation_mm DESC) AS rank_precipitation
+  FROM
+    cloudy_season
+) ranked_data
+WHERE
+  rank_precipitation = 1;
+
