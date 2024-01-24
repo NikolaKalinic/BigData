@@ -1,4 +1,4 @@
-1. Prosecna godisnja temperatura po gradovima
+1. Prosecna godisnja temperatura po gradovima za svaku godinu od 1980
 
 SELECT
   DISTINCT city,
@@ -7,7 +7,7 @@ SELECT
 FROM
   data;
 
-2. Top 3 najvetrovitija dana tokom zime
+2. Top 3 najvetrovitija dana tokom zime ikada
 
 SELECT
   city,
@@ -71,4 +71,133 @@ FROM (
 ) ranked_data
 WHERE
   rank_precipitation = 1;
+  
+6. Prikaz prosecne temperature i radijacije tokom godina
+
+SELECT
+    EXTRACT(YEAR FROM time) AS year,
+    city,
+    AVG(temperature_2m_c) AS avg_temperature,
+    AVG(shortwave_radiation) AS avg_shortwave_radiation
+FROM
+    data
+GROUP BY
+    city, EXTRACT(YEAR FROM time)
+ORDER BY
+    city, year;
+    
+6. Kolicina sneznih padavina za gradove i godine
+
+SELECT
+    d.city,
+    EXTRACT(YEAR FROM d.time) AS year,
+    w.winter,
+    SUM(d.snowfall_cm) AS total_snowfall
+FROM
+    data d
+JOIN
+    winter w ON d.city = w.city AND EXTRACT(YEAR FROM d.time) = w.year
+WHERE
+    w.winter = 1
+GROUP BY
+    d.city, EXTRACT(YEAR FROM d.time), w.winter;
+    
+7. Rangira gradove po ukupnim snežnim padavinama tokom zimske sezone za svaku godinu
+
+SELECT
+    city,
+    year,
+    RANK() OVER (PARTITION BY year ORDER BY total_snowfall DESC) AS snowfall_rank,
+    total_snowfall
+FROM (
+    SELECT
+        city,
+        EXTRACT(YEAR FROM time) AS year,
+        SUM(snowfall_cm) AS total_snowfall
+    FROM
+        data
+    WHERE
+        city IS NOT NULL -- Dodajte dodatne uslove filtriranja ako je potrebno
+    GROUP BY
+        city, EXTRACT(YEAR FROM time)
+) subquery
+ORDER BY
+    year, snowfall_rank;
+
+8. Rangiranje gradova po nivou oblacnosti od 2000 godine
+
+WITH ranked_cloud_cover AS (
+  SELECT
+    city,
+    cloud_cover_percent,
+    RANK() OVER (ORDER BY AVG(cloud_cover_percent) DESC) AS cloud_cover_rank
+  FROM
+    data
+  WHERE
+    EXTRACT(YEAR FROM time) >= 2000
+  GROUP BY
+    city
+)
+SELECT
+  city,
+  AVG(cloud_cover_percent) AS avg_cloud_cover_percent
+FROM
+  data
+WHERE
+  EXTRACT(YEAR FROM time) >= 2000
+GROUP BY
+  city
+ORDER BY
+  avg_cloud_cover_percent;
+  
+9. Rangira gradove globalno prema ukupnom vremenu sunčanog sjaja izraženom u satima od 1980. godine, a zatim izdvaja tri najsvetlija grada
+
+WITH ranked_sunshine AS (
+  SELECT
+    city,
+    SUM(sunshine_duration_s) / 3600.0 AS total_sunshine_hours,
+    RANK() OVER (ORDER BY SUM(sunshine_duration_s) DESC) AS sunshine_rank
+  FROM
+    data
+  WHERE
+    EXTRACT(YEAR FROM time) >= 1980
+  GROUP BY
+    city
+)
+SELECT
+  city,
+  total_sunshine_hours
+FROM
+  ranked_sunshine
+WHERE
+  sunshine_rank <= 3;
+
+10. Pronadji mi top 5 najtopljih meseci ikada
+
+WITH max_monthly_temperature AS (
+  SELECT
+    city,
+    EXTRACT(YEAR FROM time) AS year,
+    EXTRACT(MONTH FROM time) AS month,
+    MAX(temperature_2m_c) AS max_monthly_temp
+  FROM
+    data
+  GROUP BY
+    city, EXTRACT(YEAR FROM time), EXTRACT(MONTH FROM time)
+)
+
+SELECT
+  city,
+  year,
+  month,
+  max_monthly_temp
+FROM
+  max_monthly_temperature
+WHERE
+  max_monthly_temp IS NOT NULL
+ORDER BY
+  max_monthly_temp DESC
+LIMIT 5;
+
+  
 
