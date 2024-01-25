@@ -13,6 +13,8 @@ For real-time data, a dedicated producer fetches current weather information fro
 
 Data visualization is accomplished using Apache Superset, which connects to Hive for querying and rendering intuitive visualizations. This end-to-end architecture ensures WeatherWise Analytics provides a comprehensive and up-to-date view of historical and real-time meteorological insights.
 
+![Alt Text](https://github.com/NikolaKalinic/BigData/blob/main/architecture.png)
+
 ## 3. Getting Started
 To get started with the WeatherWise Analytics project, follow these steps:
 
