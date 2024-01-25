@@ -136,7 +136,14 @@ query_2 = query_2.withWatermark("timestamp", "10 minutes").groupBy("location_nam
 query_2 = query_2.withColumn("window_start", col("window.start")).withColumn("window_end", col("window.end")).drop("window")
 query_2 = query_2.writeStream.outputMode("update").trigger(processingTime='1 minute').foreachBatch(lambda batch_df, batch_id: batch_df.write.saveAsTable("Max_Wind", mode="append")).start()
 
+# TOTAL PRECIPITATION
+query_3 = parsed_df.withColumn("timestamp", to_timestamp("last_updated")).drop("last_updated")
+query_3 = query_3.withWatermark("timestamp", "10 minutes").groupBy("location_name", window("timestamp", "15 minutes", "5 minutes")).agg(sum("precip_mm").alias("total_precip_mm"))
+query_3 = query_3.withColumn("window_start", col("window.start")).withColumn("window_end", col("window.end")).drop("window")
+query_3 = query_3.writeStream.outputMode("update").trigger(processingTime='1 minute').foreachBatch(lambda batch_df, batch_id: batch_df.write.saveAsTable("Total_Prec", mode="append")).start()
+
 query_raw.awaitTermination()
 query_processed.awaitTermination()
 query_1.awaitTermination()
 query_2.awaitTermination()
+query_3.awaitTermination()
