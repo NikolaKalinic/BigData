@@ -4,6 +4,8 @@ import os
 import sys
 from pyspark import SparkContext, SparkConf
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType, DoubleType
+from pyspark.sql.functions import avg, window, to_timestamp
+from pyspark.sql.window import Window
 
 def quiet_logs(sc):
   logger = sc._jvm.org.apache.log4j
@@ -122,5 +124,19 @@ parsed_df = parsed_df.drop("condition_code")
 
 query_processed = parsed_df.writeStream.outputMode("update").trigger(processingTime='1 minute').foreachBatch(lambda batch_df, batch_id: batch_df.write.saveAsTable("Processed", mode="append")).start()
 
+# AVERAGE TEMPERATURE
+query_1 = parsed_df.withColumn("timestamp", to_timestamp("last_updated")).drop("last_updated")
+query_1 = query_1.withWatermark("timestamp","10 minutes").groupBy("location_name",window("timestamp", "15 minutes", "5 minutes"),).agg(avg("temp_c").alias("avg_temp_c"))
+query_1 = query_1.withColumn("window_start", col("window.start")).withColumn("window_end", col("window.end")).drop("window")
+query_1 = query_1.writeStream.outputMode("update").trigger(processingTime='1 minute').foreachBatch(lambda batch_df, batch_id: batch_df.write.saveAsTable("Avg_Temp", mode="append")).start()
+
+# MAX WIND
+query_2 = parsed_df.withColumn("timestamp", to_timestamp("last_updated")).drop("last_updated")
+query_2 = query_2.withWatermark("timestamp", "10 minutes").groupBy("location_name", window("timestamp", "15 minutes", "5 minutes")).agg(max("wind_kph").alias("max_wind_kph"))
+query_2 = query_2.withColumn("window_start", col("window.start")).withColumn("window_end", col("window.end")).drop("window")
+query_2 = query_2.writeStream.outputMode("update").trigger(processingTime='1 minute').foreachBatch(lambda batch_df, batch_id: batch_df.write.saveAsTable("Max_Wind", mode="append")).start()
+
 query_raw.awaitTermination()
 query_processed.awaitTermination()
+query_1.awaitTermination()
+query_2.awaitTermination()
